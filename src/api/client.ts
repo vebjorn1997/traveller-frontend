@@ -45,8 +45,6 @@ class ApiClient {
       
       // Validate response if schema provided
       if (schema) {
-        console.log('Validating response with schema', schema)
-        console.log('Response data', data)
         return schema.parse(data)
       }
       
