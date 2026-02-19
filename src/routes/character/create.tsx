@@ -34,7 +34,6 @@ function RouteComponent() {
       onBlur: schema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value)
       try {
         const characterData = {
           name: value.name,
