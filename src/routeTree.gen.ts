@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTableRouteImport } from './routes/demo/table'
-import { Route as DemoDrizzleRouteImport } from './routes/demo/drizzle'
 import { Route as CharacterViewRouteImport } from './routes/character/view'
 import { Route as CharacterCreateRouteImport } from './routes/character/create'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
@@ -25,11 +24,6 @@ const IndexRoute = IndexRouteImport.update({
 const DemoTableRoute = DemoTableRouteImport.update({
   id: '/demo/table',
   path: '/demo/table',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoDrizzleRoute = DemoDrizzleRouteImport.update({
-  id: '/demo/drizzle',
-  path: '/demo/drizzle',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CharacterViewRoute = CharacterViewRouteImport.update({
@@ -57,7 +51,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/character/create': typeof CharacterCreateRoute
   '/character/view': typeof CharacterViewRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -66,7 +59,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/character/create': typeof CharacterCreateRoute
   '/character/view': typeof CharacterViewRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -76,7 +68,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/character/create': typeof CharacterCreateRoute
   '/character/view': typeof CharacterViewRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -87,7 +78,6 @@ export interface FileRouteTypes {
     | '/'
     | '/character/create'
     | '/character/view'
-    | '/demo/drizzle'
     | '/demo/table'
     | '/demo/form/address'
     | '/demo/form/simple'
@@ -96,7 +86,6 @@ export interface FileRouteTypes {
     | '/'
     | '/character/create'
     | '/character/view'
-    | '/demo/drizzle'
     | '/demo/table'
     | '/demo/form/address'
     | '/demo/form/simple'
@@ -105,7 +94,6 @@ export interface FileRouteTypes {
     | '/'
     | '/character/create'
     | '/character/view'
-    | '/demo/drizzle'
     | '/demo/table'
     | '/demo/form/address'
     | '/demo/form/simple'
@@ -115,7 +103,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CharacterCreateRoute: typeof CharacterCreateRoute
   CharacterViewRoute: typeof CharacterViewRoute
-  DemoDrizzleRoute: typeof DemoDrizzleRoute
   DemoTableRoute: typeof DemoTableRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
@@ -135,13 +122,6 @@ declare module '@tanstack/react-router' {
       path: '/demo/table'
       fullPath: '/demo/table'
       preLoaderRoute: typeof DemoTableRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/drizzle': {
-      id: '/demo/drizzle'
-      path: '/demo/drizzle'
-      fullPath: '/demo/drizzle'
-      preLoaderRoute: typeof DemoDrizzleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/character/view': {
@@ -179,7 +159,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CharacterCreateRoute: CharacterCreateRoute,
   CharacterViewRoute: CharacterViewRoute,
-  DemoDrizzleRoute: DemoDrizzleRoute,
   DemoTableRoute: DemoTableRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
