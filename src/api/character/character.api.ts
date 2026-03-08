@@ -34,4 +34,11 @@ export const characterApi = {
       z.array(characterResponseSchema) // Validate array response
     )
   },
+
+  getById: async (id: string): Promise<Character> => {
+    return apiClient.get<Character>(
+      `/api/characters/get-by-id/${id}`,
+      characterResponseSchema
+    )
+  },
 }

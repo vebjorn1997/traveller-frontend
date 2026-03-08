@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
 import type { Character } from '@/api/character/types'
@@ -7,7 +7,7 @@ import { columns } from '@/table/character/view';
 import { rankItem } from '@tanstack/match-sorter-utils';
 import { characterApi } from '@/api/character/character.api';
 
-export const Route = createFileRoute('/character/view')({
+export const Route = createFileRoute('/character/view/')({
   component: RouteComponent,
 })
 
@@ -27,7 +27,9 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
 function RouteComponent() {
 
   const [data, setData] = useState<Character[]>([]);
+  const navigate = useNavigate({ from: '/character/view/' })
 
+  
   useEffect(() => {
     characterApi.getAll().then((data) => {
       setData(data);
@@ -60,7 +62,13 @@ function RouteComponent() {
           </thead>
           <tbody className="divide-y divide-gray-700">
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="hover:bg-gray-200 transition-colors divide-x divide-gray-700">
+              <tr 
+              key={row.id} 
+              className="hover:bg-gray-200 transition-colors divide-x divide-gray-700"
+              onClick={() => {
+                navigate({ to: '/character/view/$id', params: { id: row.original.id ?? '' } })
+              }}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id} className="px-4 py-3">{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
                 ))}

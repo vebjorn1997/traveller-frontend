@@ -11,10 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTableRouteImport } from './routes/demo/table'
-import { Route as CharacterViewRouteImport } from './routes/character/view'
 import { Route as CharacterCreateRouteImport } from './routes/character/create'
+import { Route as CharacterViewIndexRouteImport } from './routes/character/view/index'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
+import { Route as CharacterViewIdRouteImport } from './routes/character/view/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -26,14 +27,14 @@ const DemoTableRoute = DemoTableRouteImport.update({
   path: '/demo/table',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CharacterViewRoute = CharacterViewRouteImport.update({
-  id: '/character/view',
-  path: '/character/view',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CharacterCreateRoute = CharacterCreateRouteImport.update({
   id: '/character/create',
   path: '/character/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CharacterViewIndexRoute = CharacterViewIndexRouteImport.update({
+  id: '/character/view/',
+  path: '/character/view/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoFormSimpleRoute = DemoFormSimpleRouteImport.update({
@@ -46,66 +47,78 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
   path: '/demo/form/address',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CharacterViewIdRoute = CharacterViewIdRouteImport.update({
+  id: '/character/view/$id',
+  path: '/character/view/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/character/create': typeof CharacterCreateRoute
-  '/character/view': typeof CharacterViewRoute
   '/demo/table': typeof DemoTableRoute
+  '/character/view/$id': typeof CharacterViewIdRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/character/view/': typeof CharacterViewIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/character/create': typeof CharacterCreateRoute
-  '/character/view': typeof CharacterViewRoute
   '/demo/table': typeof DemoTableRoute
+  '/character/view/$id': typeof CharacterViewIdRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/character/view': typeof CharacterViewIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/character/create': typeof CharacterCreateRoute
-  '/character/view': typeof CharacterViewRoute
   '/demo/table': typeof DemoTableRoute
+  '/character/view/$id': typeof CharacterViewIdRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/character/view/': typeof CharacterViewIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/character/create'
-    | '/character/view'
     | '/demo/table'
+    | '/character/view/$id'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/character/view/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/character/create'
-    | '/character/view'
     | '/demo/table'
+    | '/character/view/$id'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/character/view'
   id:
     | '__root__'
     | '/'
     | '/character/create'
-    | '/character/view'
     | '/demo/table'
+    | '/character/view/$id'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/character/view/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CharacterCreateRoute: typeof CharacterCreateRoute
-  CharacterViewRoute: typeof CharacterViewRoute
   DemoTableRoute: typeof DemoTableRoute
+  CharacterViewIdRoute: typeof CharacterViewIdRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
+  CharacterViewIndexRoute: typeof CharacterViewIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -124,18 +137,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTableRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/character/view': {
-      id: '/character/view'
-      path: '/character/view'
-      fullPath: '/character/view'
-      preLoaderRoute: typeof CharacterViewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/character/create': {
       id: '/character/create'
       path: '/character/create'
       fullPath: '/character/create'
       preLoaderRoute: typeof CharacterCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/character/view/': {
+      id: '/character/view/'
+      path: '/character/view'
+      fullPath: '/character/view/'
+      preLoaderRoute: typeof CharacterViewIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/form/simple': {
@@ -152,16 +165,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoFormAddressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/character/view/$id': {
+      id: '/character/view/$id'
+      path: '/character/view/$id'
+      fullPath: '/character/view/$id'
+      preLoaderRoute: typeof CharacterViewIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CharacterCreateRoute: CharacterCreateRoute,
-  CharacterViewRoute: CharacterViewRoute,
   DemoTableRoute: DemoTableRoute,
+  CharacterViewIdRoute: CharacterViewIdRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
+  CharacterViewIndexRoute: CharacterViewIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
